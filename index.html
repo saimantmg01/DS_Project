@@ -4,20 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Project</title>
     <link rel="stylesheet" href= "style.css">
 </head>
 <body>
     <div class = "menu">
         <ul>
-            <li>Home</li>
-            <li>Contact</li>
-            <li>About</li>
+            <li>
+                <a href="index.html">Home</a> </li>
+            <li>
+                <a href= "project.html">Project</a></li>
         </ul>
     </div>
+    <div class = "content">
     <div class="header">
-        <h1> Subway Accessible ATM's</h1>
+        <h1> Subway Accessible ATM's</h1>   
+        <img src="atm.jpeg" alt="Picture of ATM" style="width: 350px"> 
     </div>
-    <iframe id = "map" src = "map.html"></iframe>
+    <div class= "overview">
+        <h2>Overview</h2>
+        <p>
+            My underlying hypothesis for this project was to find walkable ATM stations, to be specific around 0.5 km, from a certain subway station throughout NYC. This would allow user to see at which subway stations, they could find ATM in a walkable distance. In process of testing and exploring this hypothesis of the project, I tested various python libraries such as pandasql and sklearn for analysis purposes and joining various datasets, pandas for data analysis and manipulation, scipy and numpy for calculation and other purposes, and folium for data visualization over NYC map. In the end, I narrowed down my uses of python libraries to pandas for data filtering, cleaning, and formatting, ball tree algorithm from sklearn for calculating and getting closest ATM from subway station. Lastly, used folium to map subway station’s locations with ATM locations within walkable distance of 0.5 km over NYC map.
+        </p>
+    </div>
+    <div class = "Data">
+        <h2>Data Section</h2>
+        <a href="https://catalog.data.gov/dataset/bank-owned-atm-locations-in-new-york-state">NYC Bank ATM</a>
+        <p>Above dataset included the information about all the ATM in the NY State. To be specific, it has information about name of institution, street address, city, zip code, county, and georeference. Initially, dataset included duplicate rows, instances / rows with empty georeference (both latitude and longitude in same column), and oddly capitalized values in certain places. For the project, I first get rid of rows with duplicates and missing values, capitalized every value in columns, and narrow down the dataset to work only on ATM which are in NYC area. This dataset was used to compare distances with Subway Station dataset below.</p>
+        <a href = "https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49">Subway Station</a>
+        <p>Above dataset included the information about all the subway stations in NYC area. To be specific, it has information about URL consisting of link of website, object id, name, the_geom (both latitude and longitude in same column), subway line, and other notes about each subway stations. For the project, I used the above dataset to find closest ATM to each subway station and only show subway stations which would have ATM in walkable distance of less than 0.5 km in map.</p>
+    </div>
+    <div class = "Techniques">
+        <h3>Techniques</h3>
+        <p>First, I got the NYC Atm data from Data.gov and NYC Subway data from NYC Open Data in csv format. Using pandas, these csv files turned it into a dataframe allowing data manipulation methods to clean unnecessary data such as duplicates and rows with missing values, capitalizing values and create new columns which would include latitude and longitude extracted from string with both longitude and latitude value in same column for both datasets. I also converted degree to radians in latitude and longitude when they were extracted. Then, I used Ball tree algorithm from sklearn which would allow NYC ATM data to be setup as tree which will be matched against each row in subway station dataset using haversine function to calculate distance. Giving in process nearest ATM to subway stations. Then, I added this nearest ATM data such as Name, Longitude, latitude, and distance on original subway station dataset. After that, I filtered out subway station dataset to only show subway station distance with less than 0.5 km. Lastly, I used all these information to plot subway stations and nearby ATM stations to that particular subway with line connecting them.</p>
+    </div>
+    <div class = "Citations">
+        <h2>Citations:</h2>
+        <p>A citations section with links to all data sources, code sources, publications used.</p>
+        <p>Datasets:</p>
+        <li><a href="https://catalog.data.gov/dataset/bank-owned-atm-locations-in-new-york-state">NYC Bank ATM</a></li>
+        <li><a href = "https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49">Subway Station</a></li>
+        <p>Other Resources:</p>
+        <li><a href= "https://python-visualization.github.io/folium/quickstart.html">Folium</a></li>
+        <li><a href="https://pandas.pydata.org/docs/user_guide/index.html#user-guide">Pandas</a></li>
+        <li><a href="https://pandas.pydata.org/pandas-docs/dev/getting_started/intro_tutorials/index.html">Pandas Tutorials</a></li>
+        <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html">Ball Tree Algorithm</a></li>
+        <li><a href="https://towardsdatascience.com/using-scikit-learns-binary-trees-to-efficiently-find-latitude-and-longitude-neighbors-909979bd929b">Data Science</a></li>
+    </div>
+</div>
 </body>
 </html>
