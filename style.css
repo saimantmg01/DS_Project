@@ -2,6 +2,10 @@ body {
     margin: 0;
     padding: 0;
 }
+.content {
+    padding-left: 30px;
+    padding-right: 30px;
+}
 .menu {
     width: 100%;
     height: 3em;
